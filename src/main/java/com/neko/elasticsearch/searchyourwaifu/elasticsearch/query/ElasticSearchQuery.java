@@ -8,14 +8,17 @@ public class ElasticSearchQuery {
 
     public String fuzzyQueryNGram(String query) {
         return String.format("{\n" +
-                " \"query\": {\n" +
-                "   \"match\": {\n" +
-                "    \"full_name\":{\n" +
-                "    \"query\": \"%s\",\n" +
-                "    \"fuzziness\": \"AUTO\"\n" +
-                "   }\n" +
-                "  }\n" +
-                " }\n" +
+                "    \"query\" : {\n" +
+                "        \"bool\" : {\n" +
+                "            \"must\" : {\n" +
+                "                \"wildcard\" : {\n" +
+                "                   \"full_name\" : {\n" +
+                "                       \"value\" : \"*%s*\"\n" +
+                "                   }\n" +
+                "                }\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
                 "}", query);
     }
 
